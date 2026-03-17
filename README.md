@@ -71,8 +71,10 @@ sudo sysctl -w vm.max_map_count=262144
 # 若需永久生效，请将配置写入 /etc/sysctl.conf
 ```
 
-3. 启动服务
+**3. 启动服务**
+
 进入部署目录，根据你的硬件选择对应的配置文件启动。
+
 ```bash
 cd docker
 
@@ -84,7 +86,8 @@ docker compose -f docker-compose.yml up -d
 首次启动会自动拉取所需的镜像，请耐心等待。
 ```
 
-4. 访问与使用
+**4. 访问与使用**
+
 服务启动后，在浏览器访问 http://localhost 即可进入前端界面。默认端口可在 docker/.env 文件中修改。
 
 服务后端 API: http://localhost:8000/api (可在 docker/service_conf.yaml 中配置模型和端口)
@@ -123,6 +126,7 @@ rag-paper-assistant/
 └── config/                      # 配置文件
     └── settings.py              # 全局参数配置
 ```
+
 # 🔧 核心代码修改说明
 本项目对 RAGFlow 的定制化主要体现在替换和增强其核心处理逻辑。以下是关键代码文件的修改说明：
 
@@ -157,13 +161,13 @@ rag-paper-assistant/
 
 新增：领域专用 Prompt 模板和幻觉检测器。
 
-Prompt 修改 (prompt_templates.py)：为“方法专家”、“实验分析师”等不同场景设计了不同的 Prompt，强制要求答案结构化、引用来源，并明确说明“未提及”的情况。
+**Prompt 修改 (prompt_templates.py)：** 为“方法专家”、“实验分析师”等不同场景设计了不同的 Prompt，强制要求答案结构化、引用来源，并明确说明“未提及”的情况。
 
-幻觉检测 (hallucination_detector.py)：在答案生成后，通过引用校验、与原文的语义相似度计算等方法，给答案一个置信度分数，低分答案会提示用户人工复核。
+**幻觉检测 (hallucination_detector.py)：** 在答案生成后，通过引用校验、与原文的语义相似度计算等方法，给答案一个置信度分数，低分答案会提示用户人工复核。
 
 
 
-🙏 致谢与参考
+**🙏 致谢与参考**
 本项目基于 infiniflow/ragflow 优秀的开源框架构建，其灵活的架构为本项目的定制化提供了坚实基础。
 
 部署流程、环境配置和基础服务编排严格遵循 RAGFlow 官方中文 README 的指导规范(https://github.com/infiniflow/ragflow/blob/main/README_zh.md)。
